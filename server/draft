@@ -1,0 +1,1 @@
+sudo docker run --name postgres -e POSTGRES_PASSWORD=T1llhu8 -e POSTGRES_USER=tillhub -e POSTGRES_DB=urlshortner -p 5432:5432 -d postgres

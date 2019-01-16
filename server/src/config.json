@@ -1,0 +1,11 @@
+{
+  "name": "urlshortner",
+  "port": 8090,
+  "db": {
+    "host": "localhost",
+    "port": "5432",
+    "database": "urlshortner",
+    "user": "tillhub",
+    "password": "T1llhu8"
+  }
+}
