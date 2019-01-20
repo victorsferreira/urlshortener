@@ -6,7 +6,7 @@ import Url from './Url';
 const Router = () => (
     <HashRouter>
         <Switch>            
-            <Route path="/create" exact component={Create} />
+            <Route path="/" exact component={Create} />
             <Route path="/:shortUrl" exact component={Url} />
         </Switch>
     </HashRouter>

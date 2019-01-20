@@ -7,11 +7,12 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^5.2.0",
+    "nodemon": "^1.18.9",
     "sinon": "^7.2.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/index.js"
+    "start": "./node_modules/.bin/nodemon src/index.js"
   },
   "keywords": [],
   "author": "",

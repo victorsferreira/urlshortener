@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Api from './api';
+import copy from 'copy-to-clipboard';
 
 class Create extends Component {
   constructor() {
@@ -8,6 +9,7 @@ class Create extends Component {
 
     this.state = {
       url: '',
+      code: null,
       shortUrl: ''
     }
   }
@@ -17,20 +19,51 @@ class Create extends Component {
     this.setState({ url: value });
   }
 
+  checkUrl(input){
+    const pattern = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/g;
+    return !!input.match(pattern);
+  }
+
   shortenUrl = () => {
-    Api.post('', { url: this.state.url })
-    .then((response) => {
-      const { shortUrl } = response.data;
-      this.setState({ shortUrl });
-    });
+    const cleanUrl = this.state.url.replace(/http:\/\//g, '');
+    const url = `http://${cleanUrl}`;
+
+    if(!this.checkUrl(url)){
+      alert('Url is not valid');
+      return;
+    }
+
+    Api.post('', { url })
+      .then((response) => {
+        const { shortUrl: code } = response.data;
+        const shortUrl = this.createShortUrl(code)
+        this.setState({ code, shortUrl });
+      });
+  }
+
+  createShortUrl(code) {
+    return `http://localhost:3000/#/${code}`;
+  }
+
+  copyToClipboard = () => {
+    copy(this.state.shortUrl);
   }
 
   render() {
     return (
       <div className="Create">
-        <input placeholder="Your URL goes here" onChange={this.urlHandler} />
+        http://<input placeholder="Your URL goes here" onChange={this.urlHandler} />
         <button onClick={this.shortenUrl}>Shorten it!</button>
-        <div>{this.state.shortUrl}</div>
+        <div>
+          {
+            this.state.shortUrl && (
+              <div>
+                <a href={this.state.shortUrl}>{this.state.shortUrl}</a>
+                <button onClick={this.copyToClipboard}>Copy to clipboard</button>
+              </div>
+            )
+          }
+        </div>
       </div>
     );
   }

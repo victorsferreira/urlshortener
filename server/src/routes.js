@@ -3,7 +3,7 @@ const Controller = require('./controller');
 
 const router = Router();
 
-router.get('/', factory('index'));
+router.get('/:code', factory('index'));
 router.post('/', factory('create'));
 
 function factory(methodName){

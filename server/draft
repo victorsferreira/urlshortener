@@ -1,1 +1,12 @@
 sudo docker run --name postgres -e POSTGRES_PASSWORD=T1llhu8 -e POSTGRES_USER=tillhub -e POSTGRES_DB=urlshortner -p 5432:5432 -d postgres
+
+sudo docker exec -it postgres bash
+
+psql -U tillhub -d urlshortner
+
+CREATE TABLE url(
+ id serial PRIMARY KEY,
+ url TEXT NOT NULL,
+ code VARCHAR (10) NOT NULL,
+ created_on TIMESTAMP NOT NULL
+);
