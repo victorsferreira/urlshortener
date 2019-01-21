@@ -1,0 +1,6 @@
+CREATE TABLE url(
+ id serial PRIMARY KEY,
+ url TEXT NOT NULL,
+ code VARCHAR (10) NOT NULL,
+ created_on TIMESTAMP NOT NULL
+);

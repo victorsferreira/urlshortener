@@ -12,14 +12,14 @@ class Controller {
 
     this.service.findUrl(code)
       .then((result) => {
+        console.log('Finished loading an URL');
+
         res.status(200).json({
           url: result
         });
       })
       .catch((error) => {
-        res.status(500).json({
-          message: 'Internal Server Error'
-        });
+        next(error);
       })
   }
 
@@ -27,14 +27,14 @@ class Controller {
     const { url } = req.body;
     this.service.createShortUrl(url)
       .then((result) => {
+        console.log('Finished creating a short URL');
+
         res.status(200).json({
           shortUrl: result
         });
       })
       .catch((error) => {
-        res.status(500).json({
-          message: 'Internal Server Error'
-        });
+        next(error);
       })
   }
 }

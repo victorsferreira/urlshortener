@@ -22,8 +22,8 @@ class Service {
     const result = await this.db.query(sql);
 
     if (!result.rowCount) {
-      const error = new Error(`Couldn't create a short URL`);
-      console.log(error.message);
+      const error = new Error(`Couldn't find an URL for code ${code}`);
+      error.status = 404;
       throw error;
     }
 
@@ -38,7 +38,7 @@ class Service {
       const result = await this.db.query(sql);
       if (!result.rowCount) {
         const error = new Error(`Couldn't create a short URL`);
-        console.log(error.message);
+        error.status = 400;
         throw error;
       }
 

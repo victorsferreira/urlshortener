@@ -14,7 +14,6 @@ class App extends Component {
     const { shortUrl } = this.props.match.params;
     Api.get(shortUrl)
       .then((response) => {
-        debugger;
         const { url } = response.data;
         window.location.href = url;
       });

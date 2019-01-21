@@ -1,5 +1,6 @@
-const axios = require('axios');
+import config from './config';
+import axios from 'axios';
 
 export default axios.create({
-  baseURL: 'http://localhost:8090'
+  baseURL: config.SERVER_URL
 });

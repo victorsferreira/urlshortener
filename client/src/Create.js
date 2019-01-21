@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Api from './api';
 import copy from 'copy-to-clipboard';
+import config from './config';
 
 class Create extends Component {
   constructor() {
@@ -32,7 +33,7 @@ class Create extends Component {
       alert('Url is not valid');
       return;
     }
-
+    
     Api.post('', { url })
       .then((response) => {
         const { shortUrl: code } = response.data;
@@ -42,7 +43,7 @@ class Create extends Component {
   }
 
   createShortUrl(code) {
-    return `http://localhost:3000/#/${code}`;
+    return `${config.PUBLIC_URL}/#/${code}`;
   }
 
   copyToClipboard = () => {
