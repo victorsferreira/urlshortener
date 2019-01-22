@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "copy-to-clipboard": "^3.0.8",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-router-dom": "^4.3.1",
@@ -11,8 +12,8 @@
     "styled-components": "^4.1.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "SERVER_URL=http://104.131.66.95:8090 PUBLIC_URL=http://104.131.66.95:3000 react-scripts start",
+    "build": "SERVER_URL=http://104.131.66.95:8090 PUBLIC_URL=http://104.131.66.95:3000 react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prd": "./node_modules/webpack/bin/webpack.js --mode production --config ./config/webpack.config.prd.js --env.NODE_ENV=production --progress"
