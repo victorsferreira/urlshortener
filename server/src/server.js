@@ -13,7 +13,7 @@ class Server {
 
   setup(routes) {
     this.app.use(cors(
-      { origin: 'http://localhost:3000' }
+      { origin: config.client.url }
     ));
 
     this.app.use(bodyParser.urlencoded({ extended: false }))

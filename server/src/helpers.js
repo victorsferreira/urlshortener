@@ -10,6 +10,12 @@ function waitOn(miliseconds) {
   });
 }
 
+function checkUrl(input) {
+  const pattern = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/g;
+  return !!input.match(pattern);
+}
+
 module.exports = {
-  waitOn
+  waitOn,
+  checkUrl
 };

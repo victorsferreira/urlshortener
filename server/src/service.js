@@ -1,13 +1,9 @@
 const db = require('./db');
+const { checkUrl } = require('./helpers');
 
 class Service {
   constructor() {
     this.db = db;
-  }
-
-  checkUrl(input){
-    const pattern = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/g;
-    return !!input.match(pattern);
   }
 
   getUrl(code) {
@@ -27,10 +23,18 @@ class Service {
       throw error;
     }
 
-    return result.rows[0].url;
+    const { url } = result.rows[0];
+
+    return { url };
   }
 
   async createShortUrl(url) {
+    if (!checkUrl(url)) {
+      const error = new Error(`URL is not valid`);
+      error.status = 400;
+      throw error;
+    }
+
     const code = await this.generateUniqueCode();
     const sql = `INSERT INTO url (url, code, created_on) VALUES ('${url}', '${code}', NOW())`;
 
@@ -42,7 +46,7 @@ class Service {
         throw error;
       }
 
-      return code;
+      return { code };
     } catch (e) {
       console.log(`There was a problem to create a new URL`, e);
       throw e;

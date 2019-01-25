@@ -14,9 +14,7 @@ class Controller {
       .then((result) => {
         console.log('Finished loading an URL');
 
-        res.status(200).json({
-          url: result
-        });
+        res.status(200).json(result);
       })
       .catch((error) => {
         next(error);
@@ -29,9 +27,7 @@ class Controller {
       .then((result) => {
         console.log('Finished creating a short URL');
 
-        res.status(200).json({
-          shortUrl: result
-        });
+        res.status(200).json(result);
       })
       .catch((error) => {
         next(error);

@@ -7,5 +7,8 @@
     "database": "urlshortner",
     "user": "tillhub",
     "password": "T1llhu8"
+  },
+  "client": {
+    "url": "104.131.66.95:3000"
   }
 }
