@@ -4,38 +4,8 @@ import Api from './api';
 import copy from 'copy-to-clipboard';
 import config from './config';
 import styled from 'styled-components';
-
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: rgb(45, 60, 80);
-  color: rgb(240, 240, 240);
-  letter-spacing: 1px;
-
-  * {
-    font-size: 18pt;
-  }
-
-  .url {
-    input {
-      background: none;
-      border: none;
-      outline: none;
-      caret-color: rgb(240, 240, 240);
-      color: rgb(240, 240, 240);
-    }
-
-    button{
-      background: rgb(235, 59, 90);
-      border: none;
-      padding: 5px 10px;
-      color: rgb(240, 240, 240);
-      cursor: pointer;
-    }
-  }
-`;
+import { errorAlert } from './helpers';
+import Wrapper from './Wrapper';
 
 class Create extends Component {
   constructor() {
@@ -44,7 +14,11 @@ class Create extends Component {
     this.state = {
       url: '',
       code: null,
-      shortUrl: ''
+      shortUrl: '',
+
+      // url: '',
+      // code: 'blablabla',
+      // shortUrl: 'http://blablabla.com'
     }
   }
 
@@ -63,7 +37,7 @@ class Create extends Component {
     const url = `http://${cleanUrl}`;
 
     if (!this.checkUrl(url)) {
-      alert('Url is not valid');
+      errorAlert('This is not a valid URL');
       return;
     }
 
@@ -72,11 +46,14 @@ class Create extends Component {
         const { code } = response.data;
         const shortUrl = this.resolveCodeToUrl(code)
         this.setState({ code, shortUrl });
-      });
+      })
+      .catch((err) => {
+        errorAlert('There was an error to create a short URL');
+      })
   }
 
   resolveCodeToUrl(code) {
-    return `${config.PUBLIC_URL}/#/${code}`;
+    return `${config.PUBLIC_URL}/${code}`;
   }
 
   copyToClipboard = () => {
@@ -93,7 +70,7 @@ class Create extends Component {
         </div>
         {
           this.state.shortUrl && (
-            <div>
+            <div className="shortUrl">
               <a href={this.state.shortUrl}>{this.state.shortUrl}</a>
               <button onClick={this.copyToClipboard}>Copy to clipboard</button>
             </div>

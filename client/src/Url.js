@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import './App.css';
 import Api from './api';
+import { errorAlert } from './helpers';
+import styled from 'styled-components';
+
+import Wrapper from './Wrapper';
 
 class App extends Component {
   constructor() {
     super();
+
     this.state = {
-      error: false
+
     };
   }
 
@@ -16,15 +21,18 @@ class App extends Component {
       .then((response) => {
         const { url } = response.data;
         window.location.href = url;
-      });
+      })
+      .catch(() => {
+        errorAlert('Cannot load this URL');
+      })
   }
-
+  
   render() {
-    return this.state.error ? (
-      <div>URL couldn't be translated</div>
-    ) : (
+    return (
+      <Wrapper className="Url">
         <div>Loading...</div>
-      );
+      </Wrapper>
+    );
   }
 }
 
