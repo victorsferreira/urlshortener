@@ -5,38 +5,6 @@ import copy from 'copy-to-clipboard';
 import config from './config';
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: rgb(45, 60, 80);
-  color: rgb(240, 240, 240);
-  letter-spacing: 1px;
-
-  * {
-    font-size: 18pt;
-  }
-
-  .url {
-    input {
-      background: none;
-      border: none;
-      outline: none;
-      caret-color: rgb(240, 240, 240);
-      color: rgb(240, 240, 240);
-    }
-
-    button{
-      background: rgb(235, 59, 90);
-      border: none;
-      padding: 5px 10px;
-      color: rgb(240, 240, 240);
-      cursor: pointer;
-    }
-  }
-`;
-
 class Create extends Component {
   constructor() {
     super();
@@ -76,7 +44,7 @@ class Create extends Component {
   }
 
   resolveCodeToUrl(code) {
-    return `${config.PUBLIC_URL}/#/${code}`;
+    return `${config.PUBLIC_URL}/${code}`;
   }
 
   copyToClipboard = () => {
@@ -85,7 +53,7 @@ class Create extends Component {
 
   render() {
     return (
-      <Wrapper className="Create">
+      <div className="Create">
         <div className="url">
           <span className="http">http://</span>
           <input placeholder="Your URL goes here" onChange={this.urlHandler} />
@@ -99,7 +67,7 @@ class Create extends Component {
             </div>
           )
         }
-      </Wrapper>
+      </div>
     );
   }
 }
